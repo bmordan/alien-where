@@ -3,19 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
-
+	public static PlayerController instance;
 	public float jumpForce = 16f;
 	public float runningSpeed = 1.8f;
 	public LayerMask groundLayer;
-	private Rigidbody2D rigidBody;
 	public Animator animator;
+	private Rigidbody2D rigidBody;
+	private Vector3 playerStartingPosition;
+
 
 	void Awake () {
+		instance = this;
 		rigidBody = GetComponent<Rigidbody2D> ();
+		playerStartingPosition = this.transform.position;
 	}
 
-	void Start () {
+	public void StartGame () {
 		animator.SetBool ("isAlive", true);
+		this.transform.position = playerStartingPosition;
 	}
 
 	void FixedUpdate () {
@@ -36,6 +41,11 @@ public class PlayerController : MonoBehaviour {
 			if (IsGrounded())
 				rigidBody.AddForce (Vector2.up * jumpForce, ForceMode2D.Impulse);
 		}
+	}
+
+	public void Kill () {
+		GameManager.instance.GameOver ();
+		animator.SetBool ("isAlive", false);
 	}
 
 	bool IsGrounded () {
