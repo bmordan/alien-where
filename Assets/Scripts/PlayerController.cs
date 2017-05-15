@@ -5,8 +5,8 @@ public class PlayerController : MonoBehaviour {
 
 	public static PlayerController instance;
 
-	public float jumpForce = 6f;
-	public float runningSpeed = 1.5f;
+	public float jumpForce;
+	public float runningSpeed;
 	public Animator animator;
 
 	private Vector3 startingPosition;
@@ -16,19 +16,22 @@ public class PlayerController : MonoBehaviour {
 		instance = this;
 		rigidBody = GetComponent<Rigidbody2D>();
 		startingPosition = this.transform.position;
+		jumpForce = 12;
+		runningSpeed = 1.5f;
 	}
 
 
 	public void StartGame() {
 		animator.SetBool("isAlive", true);
-		this.transform.position = startingPosition;
+		if (!isGrounded())
+			this.transform.position = startingPosition;
 	}
 
 	void Update () {
 
 		if (GameManager.instance.currentGameState == GameState.inGame) 
 		{
-			if (Input.GetMouseButtonDown(0)) {
+			if (Input.GetButtonDown("Jump")) {
 				Jump();
 			}
 			animator.SetBool("isGrounded", isGrounded());
