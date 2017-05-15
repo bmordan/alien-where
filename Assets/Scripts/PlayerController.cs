@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour {
 
 	public float jumpForce = 16f;
-	public float runningSpeed = 1.5f;
+	public float runningSpeed = 1.8f;
 	public LayerMask groundLayer;
 	private Rigidbody2D rigidBody;
 	public Animator animator;
@@ -19,8 +19,10 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void FixedUpdate () {
-		if (rigidBody.velocity.x < runningSpeed)
-			rigidBody.velocity = new Vector2 (runningSpeed, rigidBody.velocity.y);
+		if (GameManager.instance.currentGameState == GameState.inGame) {
+			if (rigidBody.velocity.x < runningSpeed)
+				rigidBody.velocity = new Vector2 (runningSpeed, rigidBody.velocity.y);
+		}
 	}
 
 	void Update () {
@@ -30,8 +32,10 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void Jump () {
-		if (IsGrounded())
-		    rigidBody.AddForce (Vector2.up * jumpForce, ForceMode2D.Impulse);
+		if (GameManager.instance.currentGameState == GameState.inGame) {
+			if (IsGrounded())
+				rigidBody.AddForce (Vector2.up * jumpForce, ForceMode2D.Impulse);
+		}
 	}
 
 	bool IsGrounded () {
