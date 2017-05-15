@@ -55,7 +55,7 @@ public class GameManager : MonoBehaviour {
 
 	void Update() {
 
-		if (Input.GetButtonDown("s")) {
+		if (Input.GetButtonDown("Start")) {
 			StartGame();
 		}
 	}

@@ -16,8 +16,8 @@ public class PlayerController : MonoBehaviour {
 		instance = this;
 		rigidBody = GetComponent<Rigidbody2D>();
 		startingPosition = this.transform.position;
-		jumpForce = 12;
-		runningSpeed = 1.5f;
+		jumpForce = 18;
+		runningSpeed = 8;
 	}
 
 
@@ -40,7 +40,6 @@ public class PlayerController : MonoBehaviour {
 
 
 	void FixedUpdate() {
-
 		if (GameManager.instance.currentGameState == GameState.inGame) 
 		{
 			if (rigidBody.velocity.x < runningSpeed) {
@@ -72,9 +71,9 @@ public class PlayerController : MonoBehaviour {
 
 
 	public void Kill() {
-
 		GameManager.instance.GameOver();
 		animator.SetBool("isAlive", false);
+		CameraFollow.instance.ResetToStartPosition ();
 	}
 
 
