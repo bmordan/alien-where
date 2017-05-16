@@ -18,8 +18,8 @@ public class LevelGenerator : MonoBehaviour {
 			spawnPosition = levelStartPoint.position;
 		}
 		else {
-			piece = (LevelPiece)Instantiate(levelPrefabs[randomIndex]);
 			spawnPosition = pieces[pieces.Count-1].exitPoint.position;
+			piece = (LevelPiece)Instantiate(levelPrefabs[randomIndex]);
 		}
 
 		piece.transform.SetParent(this.transform, false);
@@ -39,9 +39,8 @@ public class LevelGenerator : MonoBehaviour {
 		Destroy (oldestPiece.gameObject);
 	}
 
-	public void ResetSpawnPoint () {
+	public void Clear () {
 		pieces.Clear();
-		Debug.Log (pieces.Count);
 	}
 
 	void Awake () {

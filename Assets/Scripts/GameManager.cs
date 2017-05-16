@@ -42,13 +42,17 @@ public class GameManager : MonoBehaviour {
 			menuCanvas.enabled = true;
 			inGameCanvas.enabled = false;
 			gameOver.enabled = false;
+
+			CameraFollow.instance.ResetToStartPosition ();
+			LevelGenerator.instance.Clear ();
 		}
 		else if (newGameState == GameState.inGame) {
 			menuCanvas.enabled = false;
 			inGameCanvas.enabled = true;
 			gameOver.enabled = false;
+
 			CameraFollow.instance.ResetToStartPosition ();
-			LevelGenerator.instance.ResetSpawnPoint ();
+			LevelGenerator.instance.Clear ();
 			PlayerController.instance.StartGame ();
 		}
 		else if (newGameState == GameState.gameOver) {

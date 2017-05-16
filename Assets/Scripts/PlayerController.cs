@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour {
 	public void StartGame() {
 		rigidBody = GetComponent<Rigidbody2D>();
 		rigidBody.gravityScale = 2.7f;
+		rigidBody.velocity = new Vector2 (0, 0);
 		jumpForce = 22;
 		runningSpeed = 8;
 		startingPosition = this.transform.position;
