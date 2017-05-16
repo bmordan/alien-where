@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour {
 
 	public void StartGame() {
 		rigidBody = GetComponent<Rigidbody2D>();
+		rigidBody.gravityScale = 2.7f;
 		jumpForce = 22;
 		runningSpeed = 8;
 		startingPosition = this.transform.position;
@@ -67,6 +68,9 @@ public class PlayerController : MonoBehaviour {
 	public void Kill() {
 		GameManager.instance.GameOver();
 		animator.SetBool("isAlive", false);
+		this.transform.position = startingPosition;
+		rigidBody.velocity = new Vector2 (0, 0);
+		rigidBody.gravityScale = 0;
 	}
 }
 	

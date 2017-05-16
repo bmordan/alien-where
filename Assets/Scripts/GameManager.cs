@@ -25,7 +25,6 @@ public class GameManager : MonoBehaviour {
 	}
 		
 	public void StartGame() {
-		PlayerController.instance.StartGame();
 		SetGameState(GameState.inGame);
 	}
 
@@ -48,6 +47,9 @@ public class GameManager : MonoBehaviour {
 			menuCanvas.enabled = false;
 			inGameCanvas.enabled = true;
 			gameOver.enabled = false;
+			CameraFollow.instance.ResetToStartPosition ();
+			LevelGenerator.instance.ResetSpawnPoint ();
+			PlayerController.instance.StartGame ();
 		}
 		else if (newGameState == GameState.gameOver) {
 			menuCanvas.enabled = false;
