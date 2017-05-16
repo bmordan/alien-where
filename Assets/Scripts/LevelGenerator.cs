@@ -38,6 +38,14 @@ public class LevelGenerator : MonoBehaviour {
 		Destroy (piece.gameObject);
 	}
 
+	public void Reset () {
+		pieces.ForEach (delegate (LevelPiece piece) {
+			Destroy(piece.gameObject);
+		});
+		pieces.Clear ();
+		GenerateInitialPieces ();
+	}
+
 	void Awake () {
 		instance = this;
 	}

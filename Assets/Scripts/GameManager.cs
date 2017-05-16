@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public enum GameState {
 	menu,
@@ -25,7 +26,8 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void ReStartGame () {
-		SetGameState(GameState.inGame);
+		LevelGenerator.instance.Reset();
+		StartGame ();
 	}
 		
 	public void StartGame() {
@@ -40,6 +42,7 @@ public class GameManager : MonoBehaviour {
 		
 	public void BackToMenu() {
 		CameraFollow.instance.ResetToStartPosition ();
+		LevelGenerator.instance.Reset();
 		SetGameState(GameState.menu);
 	}
 

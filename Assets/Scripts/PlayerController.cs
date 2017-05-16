@@ -16,15 +16,15 @@ public class PlayerController : MonoBehaviour {
 	void Awake() {
 		instance = this;
 		startingPosition = this.transform.position;
+		rigidBody = GetComponent<Rigidbody2D>();
+		jumpForce = 22;
+		runningSpeed = 8;
 	}
 
 
 	public void StartGame() {
-		rigidBody = GetComponent<Rigidbody2D>();
 		rigidBody.gravityScale = 2.7f;
 		rigidBody.velocity = new Vector2 (0, 0);
-		jumpForce = 22;
-		runningSpeed = 8;
 		animator.SetBool("isAlive", true);			
 	}
 
