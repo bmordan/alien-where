@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour {
 		instance = this;
 		rigidBody = GetComponent<Rigidbody2D>();
 		startingPosition = this.transform.position;
-		jumpForce = 18;
+		jumpForce = 22;
 		runningSpeed = 8;
 	}
 
