@@ -23,8 +23,14 @@ public class GameManager : MonoBehaviour {
 	void Start() {
 		currentGameState = GameState.menu;
 	}
+
+	public void ReStartGame () {
+		SetGameState(GameState.inGame);
+	}
 		
 	public void StartGame() {
+		CameraFollow.instance.ResetToStartPosition ();
+		PlayerController.instance.StartGame ();
 		SetGameState(GameState.inGame);
 	}
 
@@ -33,6 +39,7 @@ public class GameManager : MonoBehaviour {
 	}
 		
 	public void BackToMenu() {
+		CameraFollow.instance.ResetToStartPosition ();
 		SetGameState(GameState.menu);
 	}
 
@@ -42,18 +49,11 @@ public class GameManager : MonoBehaviour {
 			menuCanvas.enabled = true;
 			inGameCanvas.enabled = false;
 			gameOver.enabled = false;
-
-			CameraFollow.instance.ResetToStartPosition ();
-			LevelGenerator.instance.Clear ();
 		}
 		else if (newGameState == GameState.inGame) {
 			menuCanvas.enabled = false;
 			inGameCanvas.enabled = true;
 			gameOver.enabled = false;
-
-			CameraFollow.instance.ResetToStartPosition ();
-			LevelGenerator.instance.Clear ();
-			PlayerController.instance.StartGame ();
 		}
 		else if (newGameState == GameState.gameOver) {
 			menuCanvas.enabled = false;

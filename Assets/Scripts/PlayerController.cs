@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour {
 
 	void Awake() {
 		instance = this;
+		startingPosition = this.transform.position;
 	}
 
 
@@ -24,9 +25,7 @@ public class PlayerController : MonoBehaviour {
 		rigidBody.velocity = new Vector2 (0, 0);
 		jumpForce = 22;
 		runningSpeed = 8;
-		startingPosition = this.transform.position;
-		animator.SetBool("isAlive", true);
-		this.transform.position = startingPosition;			
+		animator.SetBool("isAlive", true);			
 	}
 
 	void Update () {
