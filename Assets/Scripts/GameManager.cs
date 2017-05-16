@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour {
 	public static GameManager instance;
 	public GameState currentGameState = GameState.menu;
 	public Canvas menuCanvas;
+	public Canvas inGameCanvas;
+	public Canvas gameOver;
 
 
 	void Awake() {
@@ -21,19 +23,16 @@ public class GameManager : MonoBehaviour {
 	void Start() {
 		currentGameState = GameState.menu;
 	}
-
-	//called to start the game
+		
 	public void StartGame() {
 		PlayerController.instance.StartGame();
 		SetGameState(GameState.inGame);
 	}
 
-	//called when player die
 	public void GameOver() {
 		SetGameState(GameState.gameOver);
 	}
-
-	//called when player decide to go back to the menu
+		
 	public void BackToMenu() {
 		SetGameState(GameState.menu);
 	}
@@ -42,23 +41,20 @@ public class GameManager : MonoBehaviour {
 
 		if (newGameState == GameState.menu) {
 			menuCanvas.enabled = true;
+			inGameCanvas.enabled = false;
+			gameOver.enabled = false;
 		}
 		else if (newGameState == GameState.inGame) {
 			menuCanvas.enabled = false;
+			inGameCanvas.enabled = true;
+			gameOver.enabled = false;
 		}
 		else if (newGameState == GameState.gameOver) {
 			menuCanvas.enabled = false;
+			inGameCanvas.enabled = false;
+			gameOver.enabled = true;
 		}
 
 		currentGameState = newGameState;
 	}
-
-
-	void Update() {
-
-		if (Input.GetButtonDown("Start")) {
-			StartGame();
-		}
-	}
-
 }

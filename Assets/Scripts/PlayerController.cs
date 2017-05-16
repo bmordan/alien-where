@@ -5,30 +5,29 @@ public class PlayerController : MonoBehaviour {
 
 	public static PlayerController instance;
 
-	public float jumpForce;
-	public float runningSpeed;
 	public Animator animator;
 
-	private Vector3 startingPosition;
+	public LayerMask groundLayer;
+	private float jumpForce;
+	private float runningSpeed;
+	public Vector3 startingPosition;
 	private Rigidbody2D rigidBody;
 
 	void Awake() {
 		instance = this;
-		rigidBody = GetComponent<Rigidbody2D>();
-		startingPosition = this.transform.position;
-		jumpForce = 22;
-		runningSpeed = 8;
 	}
 
 
 	public void StartGame() {
+		rigidBody = GetComponent<Rigidbody2D>();
+		jumpForce = 22;
+		runningSpeed = 8;
+		startingPosition = this.transform.position;
 		animator.SetBool("isAlive", true);
-		if (!isGrounded())
-			this.transform.position = startingPosition;
+		this.transform.position = startingPosition;			
 	}
 
 	void Update () {
-
 		if (GameManager.instance.currentGameState == GameState.inGame) 
 		{
 			if (Input.GetButtonDown("Jump")) {
@@ -56,10 +55,7 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
-	public LayerMask groundLayer;
-
 	bool isGrounded() {
-
 		if (Physics2D.Raycast(this.transform.position, Vector2.down, 0.2f, groundLayer.value)) {
 			return true;
 		}
@@ -68,14 +64,9 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
-
-
 	public void Kill() {
 		GameManager.instance.GameOver();
 		animator.SetBool("isAlive", false);
-		CameraFollow.instance.ResetToStartPosition ();
 	}
-
-
 }
 	
